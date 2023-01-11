@@ -1,0 +1,18 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua%22))()
+local Window = Library.CreateLib("Firework Simulator", "Ocean")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Infinite Money")
+Section:NewButton("INF Money", "It gives you infinite money to rebirth or use them.", function()
+    local args = {
+        [1] = 2000000000000000000000000
+    }
+
+    workspace.AddMoneyD:FireServer(unpack(args))
+    print("Clicked")
+end)
+
+
+local Tab = Window:NewTab("Credits")
+local Section = Tab:NewSection("Credits https://discord.gg/eNKrGaFB97%22)
+local Section = Tab:NewSection("Sebi#4444 - Main Scripter")
+local Section = Tab:NewSection("Hu.#0001 - Some Scripts")

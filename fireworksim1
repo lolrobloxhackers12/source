@@ -1,6 +1,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Firework Simulator", "Ocean")
+local Window = Library.CreateLib("Firework Simulator", "GrapeTheme")
 local Tab = Window:NewTab("Main")
+
 local Section = Tab:NewSection("Infinite Money")
 Section:NewButton("INF Money", "It gives you infinite money to rebirth or use them.", function()
     local args = {
@@ -8,6 +9,78 @@ Section:NewButton("INF Money", "It gives you infinite money to rebirth or use th
     }
     
     workspace.AddMoneyD:FireServer(unpack(args))
+    print("Clicked")
+end)
+
+
+local Section = Tab:NewSection("Character")
+Section:NewSlider("Speed", "Change the speed of your character, normal speed 16", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Section:NewToggle("Noclip", "Go trought walls", function(state)
+    repeat wait() until game.Players.LocalPlayer.Character
+ 
+    local StealthMode = false 
+
+    local Indicator
+    
+    if not StealthMode then
+        local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+        Indicator = Instance.new("TextLabel", ScreenGui)
+        Indicator.AnchorPoint = Vector2.new(0, 1)
+        Indicator.Position = UDim2.new(0, 0, 1, 0)
+        Indicator.Size = UDim2.new(0, 200, 0, 50)
+        Indicator.BackgroundTransparency = 1
+        Indicator.TextScaled = true
+        Indicator.TextStrokeTransparency = 0
+        Indicator.TextColor3 = Color3.new(0, 0, 0)
+        Indicator.TextStrokeColor3 = Color3.new(1, 1, 1)
+        Indicator.Text = "Noclip: Enabled"
+    end
+    
+    local noclip = true
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    
+    while true do
+        player = game.Players.LocalPlayer
+        character = player.Character
+    
+        if noclip then
+            for _, v in pairs(character:GetDescendants()) do
+                pcall(function()
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end)
+            end
+        end
+    
+        game:GetService("RunService").Stepped:wait()
+    end
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+
+
+local Section = Tab:NewSection("Miscellaneous")
+Section:NewButton("Infinite Yeld", "Basic Admin Commands", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    print("Clicked")
+end)
+
+Section:NewButton("Rebirth", "Teleport to the rebirth island faster", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(482.554047, -130.275009, 873.856384, -0.549947917, 1.01512754e-07, -0.835198939, 6.35634745e-09, 1, 1.17357779e-07, 0.835198939, 5.92318514e-08, -0.549947917)
+    print("Clicked")
+end)
+
+Section:NewButton("Auto Drop", "Drop your fireworks faster :)", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/lolrobloxhackers12/sursa/main/surse"))();   
     print("Clicked")
 end)
 
